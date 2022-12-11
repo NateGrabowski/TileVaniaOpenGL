@@ -5,22 +5,23 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
-
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float runSpeed = 4f;
     [SerializeField] float jumpSpeed = 4f;
+    [SerializeField] float climbSpeed = 4f;
     Vector2 moveInput;
     Rigidbody2D myRigidbody;
     Animator myAnimator;
     CapsuleCollider2D myCollider;
+    BoxCollider2D ladderCollider;
 
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
         myCollider = GetComponent<CapsuleCollider2D>();
+        ladderCollider = GetComponent<BoxCollider2D>();
 
     }
 
@@ -28,7 +29,10 @@ public class PlayerMovement : MonoBehaviour
     {
         Run();
         FlipSprite();
+        ClimbLadder();
     }
+
+
 
     private void FlipSprite()
     {
@@ -61,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
     void OnMove(InputValue val)
     {
         moveInput = val.Get<Vector2>();
-        Debug.Log(moveInput);
+        //Debug.Log(moveInput);
     }
 
     void OnJump(InputValue val)
@@ -72,6 +76,26 @@ public class PlayerMovement : MonoBehaviour
             {
                 myRigidbody.velocity += new Vector2(0f, jumpSpeed);
             }
+        }
+    }
+
+    void ClimbingLadder(InputValue val)
+    {
+        if (val.isPressed)
+        {
+            if (myCollider.IsTouching(ladderCollider))
+            {
+                Debug.Log("ladder touching");
+            }
+        }
+    }
+
+    private void ClimbLadder()
+    {
+        if (myCollider.IsTouchingLayers(LayerMask.GetMask("Climbing"))) //If player is touching ladder allow jump
+        {
+            Vector2 climbVelocity = new Vector2(myRigidbody.velocity.x, moveInput.y * climbSpeed);
+            myRigidbody.velocity = climbVelocity;
         }
     }
 }
