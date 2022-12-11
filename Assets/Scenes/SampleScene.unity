@@ -5130,17 +5130,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 881251260, guid: 5ef771ef98374e04887a4c62f56ab514, type: 3}
+      propertyPath: m_GravityScale
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3733259710938175573, guid: 5ef771ef98374e04887a4c62f56ab514, type: 3}
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3733259710938175573, guid: 5ef771ef98374e04887a4c62f56ab514, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.15
+      value: -3.68
       objectReference: {fileID: 0}
     - target: {fileID: 3733259710938175573, guid: 5ef771ef98374e04887a4c62f56ab514, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.38
+      value: 1.12
       objectReference: {fileID: 0}
     - target: {fileID: 3733259710938175573, guid: 5ef771ef98374e04887a4c62f56ab514, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5177,6 +5181,14 @@ PrefabInstance:
     - target: {fileID: 3733259710938175574, guid: 5ef771ef98374e04887a4c62f56ab514, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174242591983064200, guid: 5ef771ef98374e04887a4c62f56ab514, type: 3}
+      propertyPath: runSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174242591983064200, guid: 5ef771ef98374e04887a4c62f56ab514, type: 3}
+      propertyPath: jumpSpeed
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ef771ef98374e04887a4c62f56ab514, type: 3}
