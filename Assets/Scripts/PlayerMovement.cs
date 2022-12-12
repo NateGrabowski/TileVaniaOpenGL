@@ -11,11 +11,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpSpeed = 4f;
     [SerializeField] float climbSpeed = 4f;
     [SerializeField] Vector2 deathKick = new Vector2(20f, 20f);
+    [SerializeField] GameObject myBullet;
+    [SerializeField] Transform gun;
     Vector2 moveInput;
     Rigidbody2D myRigidbody;
     Animator myAnimator;
     CapsuleCollider2D myBodyCollider;
     BoxCollider2D myFeetCollider;
+
     bool playerAlive = true;
     float gravity = 0f;
 
@@ -25,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
         myAnimator = GetComponent<Animator>();
         myBodyCollider = GetComponent<CapsuleCollider2D>();
         myFeetCollider = GetComponent<BoxCollider2D>();
+        //myBullet = GetComponent<GameObject>();
         gravity += myRigidbody.gravityScale;
     }
 
@@ -75,6 +79,14 @@ public class PlayerMovement : MonoBehaviour
         {
             myAnimator.SetBool("isRunning", false);
 
+        }
+    }
+
+    void OnFire(InputValue val)
+    {
+        if (val.isPressed && playerAlive)
+        {
+            Instantiate(myBullet, gun.position, transform.rotation);
         }
     }
 
