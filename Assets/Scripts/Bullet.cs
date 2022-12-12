@@ -5,12 +5,14 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] float bulletSpeed = 9f;
+    [SerializeField] GameObject slime;
     Rigidbody2D myRigidbody;
     PlayerMovement player;
     float xSpeed;
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
+        slime = GetComponent<GameObject>();
         player = FindObjectOfType<PlayerMovement>();
         xSpeed = player.transform.localScale.x * bulletSpeed;
     }

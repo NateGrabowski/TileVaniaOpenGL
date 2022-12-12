@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 943721472275408204}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.205, y: -0.173, z: 0}
+  m_LocalPosition: {x: 0.257, y: 0.194, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3733259710938175573}
@@ -222,6 +222,8 @@ MonoBehaviour:
   jumpSpeed: 15
   climbSpeed: 4
   deathKick: {x: 20, y: 20}
+  myBullet: {fileID: 7902946188763946382, guid: 240040b300d24ef4097d5cc581be1d33, type: 3}
+  gun: {fileID: 3988280377360556739}
 --- !u!61 &3443932643142412404
 BoxCollider2D:
   m_ObjectHideFlags: 0
