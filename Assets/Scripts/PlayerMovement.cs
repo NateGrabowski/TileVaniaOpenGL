@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     CapsuleCollider2D myBodyCollider;
     BoxCollider2D myFeetCollider;
 
+
     bool playerAlive = true;
     float gravity = 0f;
 
@@ -30,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
         myFeetCollider = GetComponent<BoxCollider2D>();
         //myBullet = GetComponent<GameObject>();
         gravity += myRigidbody.gravityScale;
+
     }
 
     void Update()
@@ -50,6 +52,8 @@ public class PlayerMovement : MonoBehaviour
             playerAlive = false;
             myAnimator.SetTrigger("Dying");
             myRigidbody.velocity = deathKick;
+            FindObjectOfType<GameSession>().ProcessPlayerDeath();
+
         }
     }
 
