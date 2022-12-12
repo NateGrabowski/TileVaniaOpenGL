@@ -10,11 +10,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float runSpeed = 4f;
     [SerializeField] float jumpSpeed = 4f;
     [SerializeField] float climbSpeed = 4f;
+    [SerializeField] Vector2 deathKick = new Vector2(20f, 20f);
     Vector2 moveInput;
     Rigidbody2D myRigidbody;
     Animator myAnimator;
     CapsuleCollider2D myBodyCollider;
     BoxCollider2D myFeetCollider;
+    bool playerAlive = true;
     float gravity = 0f;
 
     void Start()
@@ -28,12 +30,24 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        Run();
-        FlipSprite();
-        ClimbLadder();
+        if (playerAlive)
+        {
+            Run();
+            FlipSprite();
+            ClimbLadder();
+            Died();
+        }
     }
 
-
+    private void Died()
+    {
+        if (myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Enemies", "Hazards")))
+        {
+            playerAlive = false;
+            myAnimator.SetTrigger("Dying");
+            myRigidbody.velocity = deathKick;
+        }
+    }
 
     private void FlipSprite()
     {
@@ -60,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             myAnimator.SetBool("isRunning", false);
+
         }
     }
 
@@ -71,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnJump(InputValue val)
     {
-        if (val.isPressed)
+        if (val.isPressed && playerAlive)
         {
             if (myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) //If player is touching ground allow jump
             {
