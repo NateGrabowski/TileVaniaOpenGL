@@ -13,16 +13,16 @@ public class PlayerMovement : MonoBehaviour
     Vector2 moveInput;
     Rigidbody2D myRigidbody;
     Animator myAnimator;
-    CapsuleCollider2D myCollider;
-    BoxCollider2D ladderCollider;
+    CapsuleCollider2D myBodyCollider;
+    BoxCollider2D myFeetCollider;
     float gravity = 0f;
 
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
-        myCollider = GetComponent<CapsuleCollider2D>();
-        ladderCollider = GetComponent<BoxCollider2D>();
+        myBodyCollider = GetComponent<CapsuleCollider2D>();
+        myFeetCollider = GetComponent<BoxCollider2D>();
         gravity += myRigidbody.gravityScale;
     }
 
@@ -73,26 +73,16 @@ public class PlayerMovement : MonoBehaviour
     {
         if (val.isPressed)
         {
-            if (myCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) //If player is touching ground allow jump
+            if (myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) //If player is touching ground allow jump
             {
                 myRigidbody.velocity += new Vector2(0f, jumpSpeed);
             }
         }
     }
 
-    void ClimbingLadder(InputValue val)
-    {
-        if (val.isPressed)
-        {
-
-            Debug.Log("ladder touching");
-
-        }
-    }
-
     private void ClimbLadder()
     {
-        if (myCollider.IsTouchingLayers(LayerMask.GetMask("Climbing"))) //If player is touching ladder allow jump
+        if (myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Climbing"))) //If player is touching ladder allow jump
         {
             myRigidbody.gravityScale = 0f;
             Vector2 climbVelocity = new Vector2(myRigidbody.velocity.x, moveInput.y * climbSpeed);
